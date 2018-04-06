@@ -242,7 +242,7 @@ void Buzzer::update()
     }
 
     // if battery failsafe constantly single buzz
-    if (AP_Notify::flags.failsafe_battery) {
+    if (AP_Notify::flags.failsafe_battery && AP_Notify::flags.armed) {
         play_pattern(SINGLE_BUZZ);
     }
 }
