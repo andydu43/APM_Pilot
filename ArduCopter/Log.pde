@@ -330,7 +330,7 @@ static void Log_Write_Control_Tuning()
         time_ms             : hal.scheduler->millis(),
         throttle_in         : g.rc_3.control_in,
         angle_boost         : attitude_control.angle_boost(),
-        throttle_out        : g.rc_3.servo_out,
+        throttle_out        : attitude_control.throttle_out(),
         desired_alt         : pos_control.get_alt_target() / 100.0f,
         inav_alt            : current_loc.alt / 100.0f,
         baro_alt            : baro_alt,

@@ -155,6 +155,9 @@ public:
      // angle_boost - accessor for angle boost so it can be logged
      int16_t angle_boost() const { return _angle_boost; }
 
+	 // angle_boost - accessor for angle boost so it can be logged
+     int16_t throttle_out() const { return _throttle_out; }
+
     //
     // helper functions
     //
@@ -253,6 +256,7 @@ protected:
     Vector3f            _rate_ef_desired;       // earth-frame feed forward rates
     Vector3f            _rate_bf_desired;       // body-frame feed forward rates
     int16_t             _angle_boost;           // used only for logging
+	int16_t             _throttle_out;           // used only for logging
     int16_t             _acro_angle_switch;           // used only for logging
 };
 

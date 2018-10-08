@@ -682,13 +682,15 @@ void AC_AttitudeControl::accel_limiting(bool enable_limits)
  // provide 0 to cut motors
 void AC_AttitudeControl::set_throttle_out(int16_t throttle_out, bool apply_angle_boost)
 {
+    _throttle_out = throttle_out;
+
+    // clear angle_boost for logging purposes
+    _angle_boost = 0;
+
     if (apply_angle_boost) {
-        _motors.set_throttle(get_angle_boost(throttle_out));
-    }else{
-        _motors.set_throttle(throttle_out);
-        // clear angle_boost for logging purposes
-        _angle_boost = 0;
+        _throttle_out = get_angle_boost(throttle_out);
     }
+    _motors.set_throttle(_throttle_out);
 
     // update compass with throttle value
     // To-Do: find another method to grab the throttle out and feed to the compass.  Could be done completely outside this class
@@ -713,6 +715,12 @@ int16_t AC_AttitudeControl::get_angle_boost(int16_t throttle_pwm)
 
     // record angle boost for logging
     _angle_boost = throttle_out - throttle_pwm;
+
+    if (_angle_boost < 0) {
+        //define _angle_boost to zero
+        _angle_boost = 0;
+        throttle_out = throttle_pwm;
+    }
 
     return throttle_out;
 }
